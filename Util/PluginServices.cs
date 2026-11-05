@@ -1,4 +1,4 @@
-﻿namespace BetterMountRoulette.Util;
+namespace BetterMountRoulette.Util;
 
 using Dalamud.Game;
 using Dalamud.IoC;
@@ -36,6 +36,9 @@ public sealed class PluginServices : IDisposable
 
     [PluginService]
     public IClientState ClientState { get; private set; } = null!;
+
+    [PluginService] public IObjectTable ObjectTable { get; private set; } = null!;
+    [PluginService] public IPlayerState PlayerState { get; private set; } = null!;
 
     [PluginService]
     public IFramework Framework { get; private set; } = null!;
@@ -101,7 +104,7 @@ public sealed class PluginServices : IDisposable
 
     private void OnFrameworkUpdate(IFramework framework)
     {
-        if (ClientState.LocalPlayer is null)
+        if (ObjectTable.LocalPlayer is null)
         {
             return;
         }
